@@ -1,0 +1,200 @@
+﻿<UserControl x:Class="CleanBrowsingClient.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:CleanBrowsingClient.Converters"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             VerticalAlignment="Stretch" 
+             HorizontalAlignment="Stretch"
+             d:DesignHeight="800" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BoolToVisibilityCollapsedConverter x:Key="BoolToVisibilityCollapsedConverter" />
+            <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+        <materialDesign:Card Height="85" Padding="32,16,32,16" Margin="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <materialDesign:Card.Background>
+                <SolidColorBrush Color="White"/>
+            </materialDesign:Card.Background>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}">Configure CleanBrowsing on your Desktop</TextBlock>
+                <Grid VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="21*" />
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <materialDesign:PackIcon.Style>
+                            <Style TargetType="materialDesign:PackIcon">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsProtected}" Value="False">
+                                        <Setter Property="Kind" Value="Close"/>
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsProtected}" Value="True">
+                                        <Setter Property="Kind" Value="Check"/>
+                                        <Setter Property="Foreground" Value="Green"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </materialDesign:PackIcon.Style>
+                    </materialDesign:PackIcon>
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignSubtitle2TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsProtected}" Value="False">
+                                        <Setter Property="Text" Value="Status: Not active. Please enable any of our filters."/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsProtected}" Value="True">
+                                        <Setter Property="Text" Value="Status: active. You are AWESOME!."/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Height="128" Margin="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="0,0,0,5">
+            <Grid VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="140" />
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Kind="Settings" Foreground="{DynamicResource MaterialDesignBodyLight}" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <StackPanel Grid.Column="1">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="16 16 16 8">Custom Filter</TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                           VerticalAlignment="Top">If you have a CleanBrowsing account with your custom filters, choose this option to tie this device to your account.</TextBlock>
+                </StackPanel>
+                <Button Command="{Binding HandleCustomFilter}" Width="120" Grid.Column="2" Foreground="White"
+                            materialDesign:ButtonProgressAssist.Value="-1"
+                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                            materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding IsWorking}"
+                                        IsEnabled="{Binding IsWorking, Converter={StaticResource ReverseBooleanConverter}}"
+                             Margin="2,0">
+                    <Button.Style >
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCustomFilterEnabled}" Value="True">
+                                    <Setter Property="Content" Value="Deactivate"/>
+                                    <Setter Property="Background" Value="#FF64DD17"/>
+                                    <Setter Property="BorderBrush" Value="#FF64DD17"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsCustomFilterEnabled}" Value="False">
+                                    <Setter Property="Content" Value="Activate"/>
+                                    <Setter Property="Background" Value="#FFFF9800"/>
+                                    <Setter Property="BorderBrush" Value="#FFFF9800"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Height="128" Margin="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="0,0,0,5">
+            <Grid VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="140" />
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Kind="HumanFemaleBoy" Foreground="{DynamicResource MaterialDesignBodyLight}" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <StackPanel Grid.Column="1">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="16 16 16 8">Free Family Filter</TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                           VerticalAlignment="Top">Recommended for kids. Blocks access to pornographic sites. It also blocks proxies, mixed content sites (like Reddit) and phishing. Google, Bing and Youtube are set to the Safe Mode.</TextBlock>
+
+
+                </StackPanel>
+
+                <Button Command="{Binding HandleFamilyFilter}" Width="120" Grid.Column="2" Foreground="White"
+                            materialDesign:ButtonProgressAssist.Value="-1"
+                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                            materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding IsWorking}"
+                                        IsEnabled="{Binding IsWorking, Converter={StaticResource ReverseBooleanConverter}}"
+                             Margin="2,0">
+                    <Button.Style >
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsFamilyFilterEnabled}" Value="True">
+                                    <Setter Property="Content" Value="Disable Filter"/>
+                                    <Setter Property="Background" Value="#FF64DD17"/>
+                                    <Setter Property="BorderBrush" Value="#FF64DD17"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsFamilyFilterEnabled}" Value="False">
+                                    <Setter Property="Content" Value="Enable Filter"/>
+                                    <Setter Property="Background" Value="#FFFF9800"/>
+                                    <Setter Property="BorderBrush" Value="#FFFF9800"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Height="128" Margin="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="0,0,0,5">
+            <Grid VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="140" />
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Kind="StateMachine" Foreground="{DynamicResource MaterialDesignBodyLight}" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <StackPanel Grid.Column="1">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="16 16 16 8">Free Adult Filter</TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                           VerticalAlignment="Top">Recommended for Adults. Blocks access to pornographic sites. Google and Bing are set to the Safe Mode. Phishing domains are blocked.</TextBlock>
+                </StackPanel>
+                <Button 
+                                    Command="{Binding HandleAdultFilter}" Width="120" Grid.Column="2" Foreground="White"
+                                    materialDesign:ButtonProgressAssist.Value="-1"
+                                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                    materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding IsWorking}"
+                                    IsEnabled="{Binding IsWorking, Converter={StaticResource ReverseBooleanConverter}}"
+                                    Margin="2,0">
+                    <Button.Style >
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsAdultFilterEnabled}" Value="True">
+                                    <Setter Property="Content" Value="Disable Filter"/>
+                                    <Setter Property="Background" Value="#FF64DD17"/>
+                                    <Setter Property="BorderBrush" Value="#FF64DD17"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsAdultFilterEnabled}" Value="False">
+                                    <Setter Property="Content" Value="Enable Filter"/>
+                                    <Setter Property="Background" Value="#FFFF9800"/>
+                                    <Setter Property="BorderBrush" Value="#FFFF9800"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+    </StackPanel>
+</UserControl>

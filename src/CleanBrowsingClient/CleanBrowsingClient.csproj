@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <PublishTrimmed>true</PublishTrimmed>
+    <AssemblyName>CleanBrowsingClient</AssemblyName>
+    <ApplicationIcon>cleanbrowsing.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>0.1.4</Version>
+    <Authors>Christian Hermann (@bitbeans)</Authors>
+    <Platforms>x64</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="dnscrypt-proxy\dnscrypt-proxy.toml" />
+    <None Remove="Images\CleanBrowsing-logo-small-dark.png" />
+    <None Remove="Images\dnscryptproxy_256.png" />
+    <None Remove="Images\login-register-smaller.jpg" />
+    <None Remove="Images\logo.png" />
+    <None Remove="Images\simplednscrypt_256.png" />
+    <None Remove="Images\splash_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="dnscrypt-proxy\dnscrypt-proxy.toml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Resource Include="Images\CleanBrowsing-logo-small-dark.png" />
+    <Resource Include="Images\dnscryptproxy_256.png" />
+    <Resource Include="Images\login-register-smaller.jpg" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\simplednscrypt_256.png" />
+    <Resource Include="Images\splash_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DnsCrypt.Stamps" Version="0.1.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0531" />
+    <PackageReference Include="MaterialDesignColors" Version="1.2.1-ci740" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.0.0-ci740" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+    <PackageReference Include="Nett" Version="0.13.0" />
+    <PackageReference Include="Prism.DryIoc" Version="7.2.0.1367" />
+    <PackageReference Include="Prism.Logging.Serilog" Version="7.2.0.1367" />
+    <PackageReference Include="Serilog" Version="2.9.1-dev-01151" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.1-dev-00771" />
+    <PackageReference Include="ShowMeTheXAML.MSBuild" Version="1.1.0-ci71" />
+    <PackageReference Include="System.Composition.AttributedModel" Version="1.3.0" />
+    <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Handles" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="4.6.0" />
+    <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Threading" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="dnscrypt-proxy\LICENSE">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(ProjectDir)DNS$(PlatformName)\*&quot; &quot;$(ProjectDir)$(OutDir)\dnscrypt-proxy\&quot;" />
+  </Target>
+</Project>

@@ -1,0 +1,70 @@
+﻿<metro:MetroWindow x:Class="CleanBrowsingClient.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:converters="clr-namespace:CleanBrowsingClient.Converters"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        ShowMaxRestoreButton="False"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignBackground}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="13"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        MinHeight="800" MinWidth="600"
+        Title="{Binding Title}" 
+        Height="800" Width="600" WindowStyle="SingleBorderWindow" >
+    <metro:MetroWindow.RightWindowCommands>
+        <metro:WindowCommands>
+            <Button Cursor="Hand" Command="{Binding NavigateToRepositoryCommand}">
+                <materialDesign:PackIcon Kind="GithubCircle"/>
+            </Button>
+            <materialDesign:PopupBox>
+                <StackPanel>
+                    <Button Content="Settings" Command="{Binding NavigateToSettingsViewCommand}"/>
+                    <Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Margin="0,8,0,0" Padding="0,8,0,0"/>
+                    <Button Content="Check for Updates" Command="{Binding CheckForUpdatesCommand}"/>
+                    <Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Margin="0,8,0,0" Padding="0,8,0,0"/>
+                    <Button Content="cleanbrowsing.org" Command="{Binding NavigateToHomepageCommand}"/>
+                    <Button Content="About and Credits" Command="{Binding NavigateToAboutViewCommand}"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
+        </metro:WindowCommands>
+    </metro:MetroWindow.RightWindowCommands>
+    <metro:MetroWindow.Resources>
+        <ResourceDictionary>
+            <converters:BoolToVisibilityCollapsedConverter x:Key="BoolToVisibilityCollapsedConverter" />
+            <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
+        </ResourceDictionary>
+    </metro:MetroWindow.Resources>
+
+    <materialDesign:DrawerHost>
+        <DockPanel>
+            <materialDesign:ColorZone 
+                Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                Mode="Standard" DockPanel.Dock="Top">
+                <DockPanel>
+                    <Image DockPanel.Dock="Top" Width="400" Source="/Images/CleanBrowsing-logo-small-dark.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" StretchDirection="DownOnly"></Image>
+                    <ProgressBar Visibility="{Binding IsWorking, Converter={StaticResource BoolToVisibilityCollapsedConverter }}" DockPanel.Dock="Bottom" Orientation="Horizontal" Height="5" IsIndeterminate="True" Margin="0,10,0,0" />
+                </DockPanel>
+            </materialDesign:ColorZone>
+            <TextBlock DockPanel.Dock="Bottom" Margin="8,2,8,2" Foreground="{DynamicResource MaterialDesignBodyLight}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Text="{Binding Footer}"/>
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Images/login-register-smaller.jpg" Stretch="UniformToFill"/>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion"/>
+                </Grid>
+                <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" x:Name="MainSnackbar" Grid.Row="1" />
+            </Grid>
+        </DockPanel>
+    </materialDesign:DrawerHost>
+</metro:MetroWindow>

@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="CleanBrowsingClient.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:prism="http://prismlibrary.com/" 
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="600">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+        <materialDesign:Card  Padding="32,16,32,16" Margin="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <materialDesign:Card.Background>
+                <SolidColorBrush Color="White"/>
+            </materialDesign:Card.Background>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}">Settings</TextBlock>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignSubtitle2TextBlock}">Here you can define basic settings</TextBlock>
+
+                <Grid Margin="0,8,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" Grid.Column="0" Style="{DynamicResource MaterialDesignSubtitle1TextBlock}" HorizontalAlignment="Stretch">You configured something wrong?</TextBlock>
+                    <Button Command="{Binding ResetToDefaultSettingsCommand}" Grid.Column="2" Style="{DynamicResource MaterialDesignRaisedButton}" Foreground="White" Content="Reset to default settings" Margin="2,0" HorizontalAlignment="Right"/>
+                </Grid>
+
+                <Grid Margin="0,8,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" Grid.Column="0" Style="{DynamicResource MaterialDesignSubtitle1TextBlock}" HorizontalAlignment="Stretch">Log Level</TextBlock>
+
+                    <ComboBox Grid.Column="2" Margin="2,0" HorizontalAlignment="Right" ItemsSource="{Binding LogLevels}" SelectedItem="{Binding CurrentLogLevel}" DisplayMemberPath="Name"/>
+                    <Button Grid.Column="3" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenLogDirectoryCommand}" ToolTip="Open the Log directory in Explorer" HorizontalAlignment="Right">VIEW LOGS</Button>
+                </Grid>
+                <Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Margin="0,8,0,0" Padding="0,8,0,0">
+                    <Button Command="{Binding NavigateToMainView}" Style="{DynamicResource MaterialDesignRaisedButton}" Width="120" Foreground="White" Content="Back to Main" Margin="2,0"/>
+                </Border>
+            </StackPanel>
+        </materialDesign:Card>
+    </StackPanel>
+</UserControl>
