@@ -13,3 +13,22 @@
 ![settings](img/preview/settings.png)
 
 ![credits](img/preview/credits.png)
+
+## Authors
+
+* **Christian Hermann** - [bitbeans](https://github.com/bitbeans)
+
+See also the list of [Contributors.md](Contributors.md) who participated in this project. 
+If you are a translator, feel free to update this file.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+## Used Software and Libraries
+
+- [DnsCrypt.Toolbox](https://github.com/bitbeans/DnsCrypt.Toolbox)
+- [helper-net](https://github.com/bitbeans/helper-net)
+- [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)
+- [Nett](https://github.com/paiden/Nett)
+- ...
