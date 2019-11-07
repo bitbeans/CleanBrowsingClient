@@ -1,12 +1,14 @@
 # Clean Browsing Client
  Windows Desktop Client for cleanbrowsing.org (DNSCrypt)
 
-You want to use DNSCrypt with another server or provider? 
-Then have a look at https://github.com/bitbeans/SimpleDnsCrypt
+You want to use DNSCrypt with another server or provider?
+Then have a look at [bitbeans/SimpleDnsCrypt](https://github.com/bitbeans/SimpleDnsCrypt "SimpleDnsCrypt")
 
-# !!Very early pre-release version. May contain bugs, may change!! #
+> **Note:** Clean Browsing Client will **not** replace the Simple DNSCrypt project! 
 
+### !!This is a very early pre-release version. May contain bugs, may change!! ###
 
+## Screenshots
 
 ![main](img/preview/main.png)
 
