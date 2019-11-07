@@ -1,4 +1,4 @@
-# CleanBrowsingClient
+# Clean Browsing Client
  Windows Desktop Client for cleanbrowsing.org (DNSCrypt)
 
 
