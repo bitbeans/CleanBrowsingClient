@@ -19,7 +19,7 @@
         Height="800" Width="600" WindowStyle="SingleBorderWindow" >
     <metro:MetroWindow.RightWindowCommands>
         <metro:WindowCommands>
-            <Button Cursor="Hand" Command="{Binding NavigateToRepositoryCommand}">
+            <Button Cursor="Hand" Command="{Binding OpenWebCommand}" CommandParameter="https://github.com/bitbeans/CleanBrowsingClient">
                 <materialDesign:PackIcon Kind="GithubCircle"/>
             </Button>
             <materialDesign:PopupBox>
@@ -28,7 +28,7 @@
                     <Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Margin="0,8,0,0" Padding="0,8,0,0"/>
                     <Button Content="Check for Updates" Command="{Binding CheckForUpdatesCommand}"/>
                     <Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Margin="0,8,0,0" Padding="0,8,0,0"/>
-                    <Button Content="cleanbrowsing.org" Command="{Binding NavigateToHomepageCommand}"/>
+                    <Button Content="cleanbrowsing.org" Command="{Binding OpenWebCommand}" CommandParameter="https://cleanbrowsing.org/"/>
                     <Button Content="About and Credits" Command="{Binding NavigateToAboutViewCommand}"/>
                 </StackPanel>
             </materialDesign:PopupBox>

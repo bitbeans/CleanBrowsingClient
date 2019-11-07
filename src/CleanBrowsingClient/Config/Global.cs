@@ -8,13 +8,10 @@ namespace CleanBrowsingClient.Config
         ///     The name of this application.
         /// </summary>
         public const string ApplicationName = "Clean Browsing Client";
-        public const string ApplicationRepository = "https://github.com/bitbeans";
 
         public const string CompanyName = "cleanbrowsing.org";
 
         public const int CopyrightYear = 2019;
-
-        public const string CompanyHomepage = "https://cleanbrowsing.org/";
 
         /// <summary>
         ///     The name of the application configuration file.

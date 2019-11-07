@@ -1,7 +1,5 @@
 ﻿using CleanBrowsingClient.Helper;
-using MaterialDesignThemes.Wpf;
 using Prism.Commands;
-using Prism.Logging;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;

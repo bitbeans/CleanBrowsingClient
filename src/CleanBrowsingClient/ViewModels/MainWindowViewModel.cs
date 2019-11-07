@@ -99,8 +99,7 @@ namespace CleanBrowsingClient.ViewModels
         public DelegateCommand NavigateToSettingsViewCommand { get; private set; }
         public DelegateCommand NavigateToStampViewCommand { get; private set; }
         public DelegateCommand CheckForUpdatesCommand { get; private set; }
-        public DelegateCommand NavigateToHomepageCommand { get; private set; }
-        public DelegateCommand NavigateToRepositoryCommand { get; private set; }
+        public DelegateCommand<string> OpenWebCommand { get; private set; }
         public DelegateCommand HandleCustomFilter { get; private set; }
         public DelegateCommand HandleFamilyFilter { get; private set; }
         public DelegateCommand HandleAdultFilter { get; private set; }
@@ -124,8 +123,7 @@ namespace CleanBrowsingClient.ViewModels
                 NavigateToAboutViewCommand = new DelegateCommand(NavigateToAboutView);
                 NavigateToStampViewCommand = new DelegateCommand(NavigateToStampView);
                 NavigateToSettingsViewCommand = new DelegateCommand(NavigateToSettingsView);
-                NavigateToHomepageCommand = new DelegateCommand(NavigateToHomepage);
-                NavigateToRepositoryCommand = new DelegateCommand(NavigateToRepository);
+                OpenWebCommand = new DelegateCommand<string>(OpenUrl);
                 CheckForUpdatesCommand = new DelegateCommand(CheckForUpdates);
 
                 HandleCustomFilter = new DelegateCommand(HandleCustomStamp);
@@ -429,20 +427,9 @@ namespace CleanBrowsingClient.ViewModels
             _regionManager.RequestNavigate("ContentRegion", "SettingsView");
         }
 
-        public void NavigateToHomepage()
+        private void OpenUrl(string url)
         {
-            if (!string.IsNullOrEmpty(Global.CompanyHomepage))
-            {
-                CoreHelper.OpenBrowser(Global.CompanyHomepage);
-            }
-        }
-
-        public void NavigateToRepository()
-        {
-            if (!string.IsNullOrEmpty(Global.ApplicationRepository))
-            {
-                CoreHelper.OpenBrowser(Global.ApplicationRepository);
-            }
+            CoreHelper.OpenBrowser(url);
         }
 
         public void CheckForUpdates()
