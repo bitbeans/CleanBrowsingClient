@@ -60,7 +60,7 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="16 16 16 8">Open Source</TextBlock>
                     <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
-                                           VerticalAlignment="Top">This project is completely Open Source (MIT). It is based on dnscrypt-proxy and Simple DNSCrypt.
+                               VerticalAlignment="Top">This project is completely Open Source (MIT). It is based on dnscrypt-proxy and Simple DNSCrypt.
 If you want to support these projects, you can press the GitHub Star button, tweet or post about them.</TextBlock>
                 </StackPanel>
                 <Border Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Padding="8,5,8,8">

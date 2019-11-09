@@ -81,14 +81,14 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="16 16 16 8">Custom Filter</TextBlock>
                     <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
-                                           VerticalAlignment="Top">If you have a CleanBrowsing account with your custom filters, choose this option to tie this device to your account.</TextBlock>
+                               VerticalAlignment="Top">If you have a CleanBrowsing account with your custom filters, choose this option to tie this device to your account.</TextBlock>
                 </StackPanel>
-                <Button Command="{Binding HandleCustomFilter}" Width="120" Grid.Column="2" Foreground="White"
-                            materialDesign:ButtonProgressAssist.Value="-1"
-                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                            materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding IsWorking}"
-                                        IsEnabled="{Binding IsWorking, Converter={StaticResource ReverseBooleanConverter}}"
-                             Margin="2,0">
+                <Button Command="{Binding HandleCustomFilter}" Width="120" Grid.Column="2" Foreground="White" 
+                        materialDesign:ButtonProgressAssist.Value="-1"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding IsWorking}"
+                        IsEnabled="{Binding IsWorking, Converter={StaticResource ReverseBooleanConverter}}"
+                        Margin="2,0">
                     <Button.Style >
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                             <Style.Triggers>
@@ -123,17 +123,14 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="16 16 16 8">Free Family Filter</TextBlock>
                     <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
-                                           VerticalAlignment="Top">Recommended for kids. Blocks access to pornographic sites. It also blocks proxies, mixed content sites (like Reddit) and phishing. Google, Bing and Youtube are set to the Safe Mode.</TextBlock>
-
-
+                               VerticalAlignment="Top">Recommended for kids. Blocks access to pornographic sites. It also blocks proxies, mixed content sites (like Reddit) and phishing. Google, Bing and Youtube are set to the Safe Mode.</TextBlock>
                 </StackPanel>
-
                 <Button Command="{Binding HandleFamilyFilter}" Width="120" Grid.Column="2" Foreground="White"
-                            materialDesign:ButtonProgressAssist.Value="-1"
-                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                            materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding IsWorking}"
-                                        IsEnabled="{Binding IsWorking, Converter={StaticResource ReverseBooleanConverter}}"
-                             Margin="2,0">
+                        materialDesign:ButtonProgressAssist.Value="-1"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding IsWorking}"
+                        IsEnabled="{Binding IsWorking, Converter={StaticResource ReverseBooleanConverter}}"
+                        Margin="2,0">
                     <Button.Style >
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                             <Style.Triggers>
@@ -168,15 +165,14 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="16 16 16 8">Free Adult Filter</TextBlock>
                     <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
-                                           VerticalAlignment="Top">Recommended for Adults. Blocks access to pornographic sites. Google and Bing are set to the Safe Mode. Phishing domains are blocked.</TextBlock>
+                               VerticalAlignment="Top">Recommended for Adults. Blocks access to pornographic sites. Google and Bing are set to the Safe Mode. Phishing domains are blocked.</TextBlock>
                 </StackPanel>
-                <Button 
-                                    Command="{Binding HandleAdultFilter}" Width="120" Grid.Column="2" Foreground="White"
-                                    materialDesign:ButtonProgressAssist.Value="-1"
-                                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                                    materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding IsWorking}"
-                                    IsEnabled="{Binding IsWorking, Converter={StaticResource ReverseBooleanConverter}}"
-                                    Margin="2,0">
+                <Button Command="{Binding HandleAdultFilter}" Width="120" Grid.Column="2" Foreground="White"
+                        materialDesign:ButtonProgressAssist.Value="-1"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding IsWorking}"
+                        IsEnabled="{Binding IsWorking, Converter={StaticResource ReverseBooleanConverter}}"
+                        Margin="2,0">
                     <Button.Style >
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                             <Style.Triggers>
