@@ -9,6 +9,7 @@
         GlowBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         ShowMaxRestoreButton="False"
+        UseLayoutRounding="True"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignBackground}"
         TextElement.FontWeight="Medium"
