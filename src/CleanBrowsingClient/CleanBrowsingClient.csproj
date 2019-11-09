@@ -3,15 +3,17 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <PublishSingleFile>true</PublishSingleFile>
-    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PublishTrimmed>true</PublishTrimmed>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
     <AssemblyName>CleanBrowsingClient</AssemblyName>
     <ApplicationIcon>cleanbrowsing.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>0.1.4</Version>
+    <Version>0.1.4.0</Version>
     <Authors>Christian Hermann (@bitbeans)</Authors>
-    <Platforms>x64</Platforms>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="dnscrypt-proxy\dnscrypt-proxy.toml" />
@@ -61,6 +63,9 @@
     </None>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(ProjectDir)DNS$(PlatformName)\*&quot; &quot;$(ProjectDir)$(OutDir)\dnscrypt-proxy\&quot;" />
+    <Exec Command="copy &quot;$(ProjectDir)DNS$(PlatformName)\*&quot; &quot;$(ProjectDir)$(OutDir)dnscrypt-proxy\&quot;" />
+  </Target>
+  <Target Name="PublishDnsCryptFolder" AfterTargets="Publish">
+    <Exec Command="xcopy &quot;$(ProjectDir)$(OutDir)dnscrypt-proxy\*&quot; &quot;$(PublishDir)dnscrypt-proxy\&quot;" />
   </Target>
 </Project>
