@@ -11,7 +11,7 @@
     <AssemblyName>CleanBrowsingClient</AssemblyName>
     <ApplicationIcon>cleanbrowsing.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>0.1.4.0</Version>
+    <Version>0.1.5.0</Version>
     <Authors>Christian Hermann (@bitbeans)</Authors>
     <Platforms>x64;x86</Platforms>
   </PropertyGroup>
