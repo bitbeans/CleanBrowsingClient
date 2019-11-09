@@ -50,6 +50,10 @@
                 <DockPanel>
                     <Image DockPanel.Dock="Top" Width="400" Source="/Images/CleanBrowsing-logo-small-dark.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" StretchDirection="DownOnly"></Image>
                     <ProgressBar Visibility="{Binding IsWorking, Converter={StaticResource BoolToVisibilityCollapsedConverter }}" DockPanel.Dock="Bottom" Orientation="Horizontal" Height="5" IsIndeterminate="True" Margin="0,10,0,0" />
+                    <Grid DockPanel.Dock="Bottom" Margin="0,10,0,0" Visibility="{Binding IsUpdating, Converter={StaticResource BoolToVisibilityCollapsedConverter }}">
+                        <ProgressBar Foreground="#75b33e" Background="#327d2e" BorderBrush="#327d2e" Orientation="Horizontal" Height="15" IsIndeterminate="False" Value="{Binding UpdateProgressValue}" />
+                        <TextBlock Text="{Binding UpdateProgressStatus}" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="White"/>
+                    </Grid>
                 </DockPanel>
             </materialDesign:ColorZone>
             <TextBlock DockPanel.Dock="Bottom" Margin="8,2,8,2" Foreground="{DynamicResource MaterialDesignBodyLight}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Text="{Binding Footer}"/>
@@ -61,7 +65,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid>
+                <Grid IsEnabled="{Binding IsUpdating, Converter={StaticResource ReverseBooleanConverter}}">
                     <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion"/>
                 </Grid>
                 <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" x:Name="MainSnackbar" Grid.Row="1" />

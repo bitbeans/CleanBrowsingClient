@@ -9,9 +9,20 @@ namespace CleanBrowsingClient.Config
         /// </summary>
         public const string ApplicationName = "Clean Browsing Client";
 
+        /// <summary>
+	    ///     Name of the company.
+	    /// </summary>
         public const string CompanyName = "cleanbrowsing.org";
 
+        /// <summary>
+        ///     First year of copyright.
+        /// </summary>
         public const int CopyrightYear = 2019;
+
+        /// <summary>
+	    ///     Remote URI where the application will find the update informations.
+	    /// </summary>
+        public const string RemoteUpdateCheckUrl = "https://raw.githubusercontent.com/bitbeans/CleanBrowsingClient/master/update.yml";
 
         /// <summary>
         ///     The name of the application configuration file.
@@ -33,13 +44,39 @@ namespace CleanBrowsingClient.Config
         /// </summary>
         public const string DnsCryptConfigurationFile = "dnscrypt-proxy.toml";
 
+        /// <summary>
+        ///     Name of the family filter key.
+        /// </summary>
         public const string DefaultFamilyFilterKey = "cleanbrowsing-family";
+
+        /// <summary>
+        ///     Default family filter stamp.
+        /// </summary>
         public const string DefaultFamilyFilterStamp = "sdns://AQMAAAAAAAAAFDE4NS4yMjguMTY4LjE2ODo4NDQzILysMvrVQ2kXHwgy1gdQJ8MgjO7w6OmflBjcd2Bl1I8pEWNsZWFuYnJvd3Npbmcub3Jn";
+
+        /// <summary>
+        ///     Name of the adult filter key.
+        /// </summary>
         public const string DefaultAdultFilterKey = "cleanbrowsing-adult";
+
+        /// <summary>
+        ///     Default adult filter stamp.
+        /// </summary>
         public const string DefaultAdultFilterStamp = "sdns://AQMAAAAAAAAAEzE4NS4yMjguMTY4LjEwOjg0NDMgvKwy-tVDaRcfCDLWB1AnwyCM7vDo6Z-UGNx3YGXUjykRY2xlYW5icm93c2luZy5vcmc";
+
+        /// <summary>
+        ///     Name of the custom filter key.
+        /// </summary>
         public const string DefaultCustomFilterKey = "cleanbrowsing-custom";
 
+        /// <summary>
+        ///     String to validate DoH stamps.
+        /// </summary>
         public const string ValidCleanBrowsingDohStamp = "doh.cleanbrowsing.org";
+
+        /// <summary>
+        ///     String to validate DnsCrypt stamps.
+        /// </summary>
         public const string ValidCleanBrowsingDnsCryptStamp = "cleanbrowsing.org";
 
         /// <summary>
@@ -67,10 +104,10 @@ namespace CleanBrowsingClient.Config
         /// </summary>
         public const int ServiceInstallTime = 3000;
 
+        /// <summary>
+        ///     Default log level.
+        /// </summary>
         public const LogEventLevel DefaultLogEventLevel = LogEventLevel.Information;
-
-        public const string DefaultResolverIpv4 = "127.0.0.1:53";
-        public const string DefaultResolverIpv6 = "[::1]:53";
 
         /// <summary>
         ///     List of files must exist.

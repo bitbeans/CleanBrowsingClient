@@ -1,0 +1,6 @@
+update:
+  version: 0.1.6.0
+  release: 2019-11-09
+  installer:
+    uri: https://github.com/bitbeans/CleanBrowsingClient/releases/download/0.1.6/CleanBrowsingClient.exe
+    name: CleanBrowsingClient.exe.msi

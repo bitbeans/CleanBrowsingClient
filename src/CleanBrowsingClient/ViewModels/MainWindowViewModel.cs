@@ -12,10 +12,15 @@ using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace CleanBrowsingClient.ViewModels
 {
@@ -32,6 +37,9 @@ namespace CleanBrowsingClient.ViewModels
         private string _title = "";
         private string _footer = "";
         private bool _isWorking = false;
+        private bool _isUpdating = false;
+        private int _updateProgressValue = 0;
+        private string _updateProgressStatus = "";
         private bool _isCustomFilterEnabled = false;
         private bool _isFamilyFilterEnabled = false;
         private bool _isAdultFilterEnabled = false;
@@ -58,6 +66,24 @@ namespace CleanBrowsingClient.ViewModels
         {
             get { return _isWorking; }
             set { SetProperty(ref _isWorking, value); }
+        }
+
+        public bool IsUpdating
+        {
+            get { return _isUpdating; }
+            set { SetProperty(ref _isUpdating, value); }
+        }
+
+        public int UpdateProgressValue
+        {
+            get { return _updateProgressValue; }
+            set { SetProperty(ref _updateProgressValue, value); }
+        }
+
+        public string UpdateProgressStatus
+        {
+            get { return _updateProgressStatus; }
+            set { SetProperty(ref _updateProgressStatus, value); }
         }
 
         public bool IsProtected
@@ -124,7 +150,10 @@ namespace CleanBrowsingClient.ViewModels
                 NavigateToStampViewCommand = new DelegateCommand(NavigateToStampView);
                 NavigateToSettingsViewCommand = new DelegateCommand(NavigateToSettingsView);
                 OpenWebCommand = new DelegateCommand<string>(OpenUrl);
-                CheckForUpdatesCommand = new DelegateCommand(CheckForUpdates);
+                CheckForUpdatesCommand = new DelegateCommand(async () =>
+                {
+                    await CheckForUpdatesAsync();
+                });
 
                 HandleCustomFilter = new DelegateCommand(HandleCustomStamp);
                 HandleFamilyFilter = new DelegateCommand(async () => await HandleDnsCrypt(Global.DefaultFamilyFilterKey));
@@ -432,9 +461,122 @@ namespace CleanBrowsingClient.ViewModels
             CoreHelper.OpenBrowser(url);
         }
 
-        public void CheckForUpdates()
+        public async Task CheckForUpdatesAsync()
         {
-            MessageQueue.Enqueue("Not yet implemented!");
+            var remoteUpdate = new RemoteUpdate();
+            try
+            {
+                _logger.Log("update check: start", Category.Info, Priority.Low);
+                var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                remoteUpdate.CanUpdate = false;
+                using var client = new HttpClient()
+                {
+                    DefaultRequestVersion = new Version(2, 0)
+                };
+                var response = await client.GetByteArrayAsync(Global.RemoteUpdateCheckUrl);
+
+                if (response != null)
+                {
+                    using (var remoteUpdateDataStream = new MemoryStream(response))
+                    {
+                        using var remoteUpdateDataStreamReader = new StreamReader(remoteUpdateDataStream);
+                        var deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
+                        remoteUpdate = deserializer.Deserialize<RemoteUpdate>(remoteUpdateDataStreamReader);
+                    }
+                    if (remoteUpdate != null)
+                    {
+                        var status = remoteUpdate.Update.Version.CompareTo(currentVersion);
+                        // The local version is newer as the remote version
+                        if (status < 0)
+                        {
+                            remoteUpdate.CanUpdate = false;
+                            _logger.Log($"update check: You are already using the latest version: {currentVersion}", Category.Info, Priority.Low);
+                            MessageQueue.Enqueue($"You are already using the latest version: {currentVersion}");
+                        }
+                        //The local version is the same as the remote version
+                        else if (status == 0)
+                        {
+                            remoteUpdate.CanUpdate = false;
+                            _logger.Log($"update check: The local version is the same as the remote version: {currentVersion}", Category.Info, Priority.Low);
+                            MessageQueue.Enqueue($"You are already using the latest version: {currentVersion}");
+                        }
+                        else
+                        {
+                            // the remote version is newer as the local version
+                            remoteUpdate.CanUpdate = true;
+                            _logger.Log($"update check: the remote version is newer as the local version: {currentVersion} < {remoteUpdate.Update.Version}", Category.Info, Priority.Low);
+                            MessageQueue.Enqueue($"A newer version exists: {remoteUpdate.Update.Version}", "Update Now", async () => await RunUpdateAsync(remoteUpdate));
+                        }
+                    }
+                    else
+                    {
+                        _logger.Log($"failed to check for updates: invalid update file", Category.Warn, Priority.High);
+                        MessageQueue.Enqueue("Failed to check for updates");
+                    }
+                }
+                else
+                {
+                    _logger.Log($"failed to check for updates: no response from server", Category.Warn, Priority.High);
+                    MessageQueue.Enqueue("Failed to check for updates");
+                }
+                _logger.Log("update check: end", Category.Info, Priority.Low);
+            }
+            catch (Exception exception)
+            {
+                MessageQueue.Enqueue("An error occurred when checking updates. Please check the logs.");
+                _logger.Log($"CheckForUpdatesAsync {exception.Message}", Category.Exception, Priority.High);
+            }
+        }
+
+        public async Task RunUpdateAsync(RemoteUpdate remoteUpdate)
+        {
+            try
+            {
+                _logger.Log("run update: start", Category.Info, Priority.Low);
+                IsUpdating = true;
+                UpdateProgressValue = 0;
+                UpdateProgressStatus = "";
+                var destinationFilePath = Path.Combine(Path.GetTempPath(), remoteUpdate.Update.Installer.Name); ;
+
+                using var client = new HttpClientDownloadWithProgress(remoteUpdate.Update.Installer.Uri, destinationFilePath);
+                client.ProgressChanged += (totalFileSize, totalBytesDownloaded, progressPercentage) =>
+                {
+                    UpdateProgressValue = (int)progressPercentage;
+                    UpdateProgressStatus = $"Downloading update {progressPercentage}% ({totalBytesDownloaded}/{totalFileSize})";
+                };
+                _logger.Log($"start download: {remoteUpdate.Update.Installer.Uri}", Category.Info, Priority.Medium);
+                await client.StartDownload();
+                _logger.Log($"download completed: {remoteUpdate.Update.Installer.Uri}", Category.Info, Priority.Medium);
+
+                if (!string.IsNullOrEmpty(destinationFilePath))
+                {
+                    if (File.Exists(destinationFilePath))
+                    {
+                        _logger.Log($"start installation of: {destinationFilePath}", Category.Info, Priority.Low);
+                        UpdateProgressStatus = "Starting installation ...";
+                        //automatic installation
+                        const string arguments = "/qb /passive /norestart";
+                        var startInfo = new ProcessStartInfo(destinationFilePath)
+                        {
+                            Arguments = arguments,
+                            UseShellExecute = true
+                        };
+                        Process.Start(startInfo);
+                        _logger.Log($"killing application", Category.Info, Priority.Low);
+                        Process.GetCurrentProcess().Kill();
+                    }
+                    else
+                    {
+                        _logger.Log($"missing installation: {destinationFilePath}", Category.Warn, Priority.Medium);
+                    }
+                }
+                IsUpdating = false;
+                _logger.Log("run update: start", Category.Info, Priority.Low);
+            }
+            catch (Exception exception)
+            {
+                _logger.Log($"RunUpdateAsync {exception.Message}", Category.Exception, Priority.High);
+            }
         }
 
         private async void CustomStampAdded(Proxy proxy)

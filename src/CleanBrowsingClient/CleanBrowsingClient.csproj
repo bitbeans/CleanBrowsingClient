@@ -53,6 +53,7 @@
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="4.6.0" />
     <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Threading" Version="4.3.0" />
+    <PackageReference Include="YamlDotNet" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="dnscrypt-proxy\LICENSE">
