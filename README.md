@@ -1,4 +1,4 @@
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/bitbeans/CleanBrowsingClient?include_prereleases&style=flat-square) ![GitHub](https://img.shields.io/github/license/bitbeans/CleanBrowsingClient?style=flat-square)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/bitbeans/CleanBrowsingClient?include_prereleases&style=flat-square) ![GitHub](https://img.shields.io/github/license/bitbeans/CleanBrowsingClient?style=flat-square) [![dnscrypt--proxy](https://img.shields.io/badge/dnscrypt--proxy-2.0.31-orange.svg?style=flat-square)](https://github.com/jedisct1/dnscrypt-proxy)
 
 ![logo](img/logo.png)
 ============
