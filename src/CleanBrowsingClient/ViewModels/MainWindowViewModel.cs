@@ -91,6 +91,26 @@ namespace CleanBrowsingClient.ViewModels
             get { return _isCustomFilterEnabled || _isFamilyFilterEnabled || _isAdultFilterEnabled; }
         }
 
+        public string IsProtectedText
+        {
+            get
+            {
+                if (_isCustomFilterEnabled)
+                {
+                    return "Status: ACTIVE. You are protected by Custom Filter.";
+                }
+                else if (_isFamilyFilterEnabled)
+                {
+                    return "Status: ACTIVE. You are protected by Free Family Filter.";
+                }
+                else if (_isAdultFilterEnabled)
+                {
+                    return "Status: ACTIVE. You are protected by Free Adult Filter.";
+                }
+                return "Status: ACTIVE (unknown filter)";
+            }
+        }
+
         public bool IsCustomFilterEnabled
         {
             get { return _isCustomFilterEnabled; }

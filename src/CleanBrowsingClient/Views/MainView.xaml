@@ -57,7 +57,7 @@
                                         <Setter Property="Text" Value="Status: Not active. Please enable any of our filters."/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding IsProtected}" Value="True">
-                                        <Setter Property="Text" Value="Status: active. You are AWESOME!."/>
+                                        <Setter Property="Text" Value="{Binding IsProtectedText}"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
