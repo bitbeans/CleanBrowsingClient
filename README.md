@@ -7,6 +7,8 @@ Windows Desktop Client for [cleanbrowsing.org](cleanbrowsing.org "cleanbrowsing.
 
 ### !!This is a very early pre-release version. May contain bugs, may change!! ###
 
+[Download latest Windows Installer (x86/x64)](https://github.com/bitbeans/CleanBrowsingClient/releases/download/0.1.5.0/Clean.Browsing.Client.exe)
+
 ## Alternatives
 
 You want to use DNSCrypt with another server or provider?
