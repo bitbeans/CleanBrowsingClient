@@ -21,7 +21,7 @@ namespace CleanBrowsingClient
         public LoggingLevelSwitch LoggingLevelSwitch;
         public App()
         {
-            SplashScreen splashScreen = new SplashScreen("Images/splash_small.png");
+            SplashScreen splashScreen = new SplashScreen("Images/logo_dark.png");
             splashScreen.Show(true);
             LoggingLevelSwitch = new LoggingLevelSwitch
             {

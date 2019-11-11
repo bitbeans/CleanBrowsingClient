@@ -11,29 +11,26 @@
     <AssemblyName>CleanBrowsingClient</AssemblyName>
     <ApplicationIcon>cleanbrowsing.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>0.1.5.0</Version>
+    <Version>0.1.6.0</Version>
     <Authors>Christian Hermann (@bitbeans)</Authors>
     <Platforms>x64;x86</Platforms>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="dnscrypt-proxy\dnscrypt-proxy.toml" />
-    <None Remove="Images\CleanBrowsing-logo-small-dark.png" />
+    <None Remove="Images\background.jpg" />
     <None Remove="Images\dnscryptproxy_256.png" />
-    <None Remove="Images\login-register-smaller.jpg" />
-    <None Remove="Images\logo.png" />
+    <None Remove="Images\logo_dark.png" />
     <None Remove="Images\simplednscrypt_256.png" />
-    <None Remove="Images\splash_small.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dnscrypt-proxy\dnscrypt-proxy.toml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Resource Include="Images\CleanBrowsing-logo-small-dark.png" />
     <Resource Include="Images\dnscryptproxy_256.png" />
-    <Resource Include="Images\login-register-smaller.jpg" />
-    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\background.jpg" />
+    <Resource Include="Images\logo_dark.png" />
     <Resource Include="Images\simplednscrypt_256.png" />
-    <Resource Include="Images\splash_small.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DnsCrypt.Stamps" Version="0.1.0" />

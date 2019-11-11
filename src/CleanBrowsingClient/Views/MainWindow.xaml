@@ -15,9 +15,9 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="13"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        MinHeight="800" MinWidth="600"
+        MinHeight="820" MinWidth="600"
         Title="{Binding Title}" 
-        Height="800" Width="600" WindowStyle="SingleBorderWindow" >
+        Height="820" Width="600" WindowStyle="SingleBorderWindow" >
     <metro:MetroWindow.RightWindowCommands>
         <metro:WindowCommands>
             <Button Cursor="Hand" Command="{Binding OpenWebCommand}" CommandParameter="https://github.com/bitbeans/CleanBrowsingClient">
@@ -48,7 +48,7 @@
                 Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                 Mode="Standard" DockPanel.Dock="Top">
                 <DockPanel>
-                    <Image DockPanel.Dock="Top" Width="400" Source="/Images/CleanBrowsing-logo-small-dark.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" StretchDirection="DownOnly"></Image>
+                    <Image DockPanel.Dock="Top" Width="400" Source="/Images/logo_dark.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" StretchDirection="DownOnly"></Image>
                     <ProgressBar Visibility="{Binding IsWorking, Converter={StaticResource BoolToVisibilityCollapsedConverter }}" DockPanel.Dock="Bottom" Orientation="Horizontal" Height="5" IsIndeterminate="True" Margin="0,10,0,0" />
                     <Grid DockPanel.Dock="Bottom" Margin="0,10,0,0" Visibility="{Binding IsUpdating, Converter={StaticResource BoolToVisibilityCollapsedConverter }}">
                         <ProgressBar Foreground="#75b33e" Background="#327d2e" BorderBrush="#327d2e" Orientation="Horizontal" Height="15" IsIndeterminate="False" Value="{Binding UpdateProgressValue}" />
@@ -59,7 +59,7 @@
             <TextBlock DockPanel.Dock="Bottom" Margin="8,2,8,2" Foreground="{DynamicResource MaterialDesignBodyLight}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Text="{Binding Footer}"/>
             <Grid>
                 <Grid.Background>
-                    <ImageBrush ImageSource="/Images/login-register-smaller.jpg" Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="/Images/background.jpg" Stretch="UniformToFill"/>
                 </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
