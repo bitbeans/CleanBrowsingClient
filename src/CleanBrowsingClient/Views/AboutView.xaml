@@ -16,7 +16,7 @@
                 <SolidColorBrush Color="White"/>
             </materialDesign:Card.Background>
             <StackPanel Orientation="Vertical">
-                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}">About Clean Browsing Client</TextBlock>
+                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}">About CleanBrowsing Client</TextBlock>
                 <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource MaterialDesignBodyLight}">
                     <LineBreak />
                     This application uses the DNSCrypt protocol. <LineBreak />

@@ -7,7 +7,7 @@ namespace CleanBrowsingClient.Config
         /// <summary>
         ///     The name of this application.
         /// </summary>
-        public const string ApplicationName = "Clean Browsing Client";
+        public const string ApplicationName = "CleanBrowsing Client";
 
         /// <summary>
 	    ///     Name of the company.
