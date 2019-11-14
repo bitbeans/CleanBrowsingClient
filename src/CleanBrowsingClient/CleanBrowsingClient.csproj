@@ -11,10 +11,11 @@
     <AssemblyName>CleanBrowsingClient</AssemblyName>
     <ApplicationIcon>cleanbrowsing.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>0.1.6.0</Version>
+    <Version>0.2.0.0</Version>
     <Authors>Christian Hermann (@bitbeans)</Authors>
     <Platforms>x64;x86</Platforms>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Product>CleanBrowsing Client</Product>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="dnscrypt-proxy\dnscrypt-proxy.toml" />
