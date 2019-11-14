@@ -392,7 +392,7 @@ namespace CleanBrowsingClient.ViewModels
                 _logger.Log(ex.Message, Category.Exception, Priority.High);
                 Environment.Exit(-1);
             }
-            MessageQueue.Enqueue("🐞 You are using a preview version! May contain bugs! 🐞");
+            //MessageQueue.Enqueue("🐞 You are using a preview version! May contain bugs! 🐞");
             IsWorking = false;
         }
 
