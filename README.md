@@ -6,7 +6,7 @@
 Windows Desktop Client for [cleanbrowsing.org](https://cleanbrowsing.org) (with [DNSCrypt](https://dnscrypt.info))
 
 
-[Download latest Windows Installer (x86/x64)](https://github.com/bitbeans/CleanBrowsingClient/releases/download/0.2.0.0/CleanBrowsingClient_Setup.exe)
+[Download latest Windows Installer (x86/x64)](https://github.com/bitbeans/CleanBrowsingClient/releases/download/0.2.1.0/CleanBrowsingClient_Setup.exe)
 
 ## Alternatives
 
