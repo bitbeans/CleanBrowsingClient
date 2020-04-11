@@ -83,7 +83,7 @@ If you want to support these projects, you can press the GitHub Star button, twe
                             </Button>
                             <Button Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding OpenWebCommand}" CommandParameter="https://github.com/bitbeans/SimpleDnsCrypt">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="GithubCircle" />
+                                    <materialDesign:PackIcon Kind="Github" />
                                     <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">View Code</TextBlock>
                                 </StackPanel>
                             </Button>
@@ -107,7 +107,7 @@ If you want to support these projects, you can press the GitHub Star button, twe
                             </Button>
                             <Button Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding OpenWebCommand}" CommandParameter="https://github.com/DNSCrypt/dnscrypt-proxy">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="GithubCircle" />
+                                    <materialDesign:PackIcon Kind="Github" />
                                     <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">View Code</TextBlock>
                                 </StackPanel>
                             </Button>

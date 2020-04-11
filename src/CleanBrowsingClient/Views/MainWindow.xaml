@@ -21,7 +21,7 @@
     <metro:MetroWindow.RightWindowCommands>
         <metro:WindowCommands>
             <Button Cursor="Hand" Command="{Binding OpenWebCommand}" CommandParameter="https://github.com/bitbeans/CleanBrowsingClient">
-                <materialDesign:PackIcon Kind="GithubCircle"/>
+                <materialDesign:PackIcon Kind="Github"/>
             </Button>
             <materialDesign:PopupBox>
                 <StackPanel>
