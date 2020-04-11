@@ -86,10 +86,7 @@ namespace CleanBrowsingClient.ViewModels
             set { SetProperty(ref _updateProgressStatus, value); }
         }
 
-        public bool IsProtected
-        {
-            get { return _isCustomFilterEnabled || _isFamilyFilterEnabled || _isAdultFilterEnabled; }
-        }
+        public bool IsProtected => _isCustomFilterEnabled || _isFamilyFilterEnabled || _isAdultFilterEnabled;
 
         public string IsProtectedText
         {
@@ -99,11 +96,11 @@ namespace CleanBrowsingClient.ViewModels
                 {
                     return "Status: ACTIVE. You are protected by Custom Filter.";
                 }
-                else if (_isFamilyFilterEnabled)
+                if (_isFamilyFilterEnabled)
                 {
                     return "Status: ACTIVE. You are protected by Free Family Filter.";
                 }
-                else if (_isAdultFilterEnabled)
+                if (_isAdultFilterEnabled)
                 {
                     return "Status: ACTIVE. You are protected by Free Adult Filter.";
                 }
@@ -662,7 +659,7 @@ namespace CleanBrowsingClient.ViewModels
         {
             try
             {
-                var stamp = _appConfiguration.Proxies.Where(p => p.Name.Equals(Global.DefaultCustomFilterKey)).FirstOrDefault();
+                var stamp = _appConfiguration.Proxies.FirstOrDefault(p => p.Name.Equals(Global.DefaultCustomFilterKey));
                 if (stamp == null)
                 {
                     _regionManager.RequestNavigate("ContentRegion", "StampView");
@@ -867,7 +864,7 @@ namespace CleanBrowsingClient.ViewModels
                         RemoveStaticStamps();
                         DnscryptProxyConfigurationManager.LoadConfiguration();
                         _dnscryptProxyConfiguration = DnscryptProxyConfigurationManager.DnscryptProxyConfiguration;
-                        var stamp = _appConfiguration.Proxies.Where(p => p.Name.Equals(filter)).FirstOrDefault();
+                        var stamp = _appConfiguration.Proxies.FirstOrDefault(p => p.Name.Equals(filter));
                         if (stamp != null)
                         {
                             if (!string.IsNullOrEmpty(stamp.Stamp))
