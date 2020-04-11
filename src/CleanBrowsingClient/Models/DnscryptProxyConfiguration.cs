@@ -27,6 +27,7 @@ namespace CleanBrowsingClient.Models
         private int _cert_refresh_delay;
         private bool _dnscrypt_ephemeral_keys;
         private bool _tls_disable_session_tickets;
+        private bool _log;
         private int _log_level;
         private string _log_file;
         private Dictionary<string, Source> _sources;
@@ -38,6 +39,8 @@ namespace CleanBrowsingClient.Models
         private int _log_files_max_age;
         private int _log_files_max_backups;
         private bool _block_ipv6;
+        private bool _block_unqualified;
+        private bool _block_undelegated;
         private int _reject_ttl;
         private string _forwarding_rules;
         private string _cloaking_rules;
@@ -47,7 +50,7 @@ namespace CleanBrowsingClient.Models
         private int _cache_min_ttl;
         private int _cache_size;
         private bool _cache;
-        private string _fallback_resolver;
+        private ObservableCollection<string> _fallback_resolvers;
         private bool _ignore_system_dns;
         private Dictionary<string, Static> _static;
         private string _proxy;
@@ -319,8 +322,8 @@ namespace CleanBrowsingClient.Models
         /// </summary>
         public bool use_syslog
         {
-            get { return _use_syslog; }
-            set { SetProperty(ref _use_syslog, value); }
+            get => _use_syslog;
+            set => SetProperty(ref _use_syslog, value);
         }
 
         /// <summary>
@@ -328,26 +331,31 @@ namespace CleanBrowsingClient.Models
         /// </summary>
         public int cert_refresh_delay
         {
-            get { return _cert_refresh_delay; }
-            set { SetProperty(ref _cert_refresh_delay, value); }
+            get => _cert_refresh_delay;
+            set => SetProperty(ref _cert_refresh_delay, value);
         }
 
         /// <summary>
-        ///     Fallback resolver
-        ///     This is a normal, non-encrypted DNS resolver, that will be only used
-        ///     for one-shot queries when retrieving the initial resolvers list, and
-        ///     only if the system DNS configuration doesn't work.
-        ///     No user application queries will ever be leaked through this resolver,
-        ///     and it will not be used after IP addresses of resolvers URLs have been found.
-        ///     It will never be used if lists have already been cached, and if stamps
-        ///     don't include host names without IP addresses.
-        ///     It will not be used if the configured system DNS works.
-        ///     A resolver supporting DNSSEC is recommended. This may become mandatory.
+        ///     Fallback resolvers
+        /// 	These are normal, non-encrypted DNS resolvers, that will be only used
+        /// 	for one-shot queries when retrieving the initial resolvers list, and
+        /// 	only if the system DNS configuration doesn't work.
+        /// 	No user application queries will ever be leaked through these resolvers,
+        /// 	and they will not be used after IP addresses of resolvers URLs have been found.
+        /// 	They will never be used if lists have already been cached, and if stamps
+        /// 	don't include host names without IP addresses.
+        /// 	They will not be used if the configured system DNS works.
+        /// 	Resolvers supporting DNSSEC are recommended.
+        /// 	
+        /// 	People in China may need to use 114.114.114.114:53 here.
+        /// 	Other popular options include 8.8.8.8 and 1.1.1.1.
+        /// 	
+        /// 	If more than one resolver is specified, they will be tried in sequence.
         /// </summary>
-        public string fallback_resolver
+        public ObservableCollection<string> fallback_resolvers
         {
-            get { return _fallback_resolver; }
-            set { SetProperty(ref _fallback_resolver, value); }
+            get => _fallback_resolvers;
+            set => SetProperty(ref _fallback_resolvers, value);
         }
 
         /// <summary>
@@ -356,8 +364,8 @@ namespace CleanBrowsingClient.Models
         /// </summary>
         public bool ignore_system_dns
         {
-            get { return _ignore_system_dns; }
-            set { SetProperty(ref _ignore_system_dns, value); }
+            get => _ignore_system_dns;
+            set => SetProperty(ref _ignore_system_dns, value);
         }
 
         /// <summary>
@@ -365,8 +373,8 @@ namespace CleanBrowsingClient.Models
         /// </summary>
         public int log_files_max_size
         {
-            get { return _log_files_max_size; }
-            set { SetProperty(ref _log_files_max_size, value); }
+            get => _log_files_max_size;
+            set => SetProperty(ref _log_files_max_size, value);
         }
 
         /// <summary>
@@ -374,8 +382,8 @@ namespace CleanBrowsingClient.Models
         /// </summary>
         public int log_files_max_age
         {
-            get { return _log_files_max_age; }
-            set { SetProperty(ref _log_files_max_age, value); }
+            get => _log_files_max_age;
+            set => SetProperty(ref _log_files_max_age, value);
         }
 
         /// <summary>
